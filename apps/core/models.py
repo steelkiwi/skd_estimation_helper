@@ -57,7 +57,7 @@ class Employee(TimeStampedModel):
 
 class Skill(TimeStampedModel):
     name = models.CharField(max_length=255, unique=True)
-    min_rate = models.SmallIntegerField(default=1)
+    min_rate = models.SmallIntegerField(default=0)
     max_rate = models.SmallIntegerField(default=4)
 
     def __str__(self):
