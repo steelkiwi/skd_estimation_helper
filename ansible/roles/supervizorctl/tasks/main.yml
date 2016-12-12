@@ -1,0 +1,16 @@
+---
+
+- name: create symlink on config
+  file: >
+    src="{{project_base_dir}}/conf/supervisor.conf"
+    dest="/etc/supervisor/conf.d/supervisor.conf"
+    state=link
+  become: yes
+  become_user: root
+  tags: supervisorctl
+
+- name: restart all supervisor tasks
+  supervisorctl: >
+    name="{{ project.name }}:"
+    state=restarted
+  tags: supervisorctl

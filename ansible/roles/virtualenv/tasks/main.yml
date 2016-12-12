@@ -1,0 +1,13 @@
+---
+
+- name: Create python virtual environment
+  pip: >
+    name={{ item }}
+    virtualenv="{{ project_venv_dir }}"
+    virtualenv_python="{{ python_ver }}"
+    state=latest
+  with_items:
+    - pip
+    - setuptools
+  become: no
+  tags: virtualenv

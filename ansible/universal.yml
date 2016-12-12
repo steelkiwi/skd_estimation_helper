@@ -1,0 +1,38 @@
+---
+- name: deploy
+  hosts: "{{ target }}"
+
+  vars:
+    - update_apt_cache: yes
+  vars_files:
+    - vars/deploy.yml
+
+  roles:
+    - { role: directory, when: "directory == true" }
+    - { role: system, when: "system == true" }
+    - { role: python2, when: "python2 == true" }
+    - { role: python3, when: "python3 == true" }
+    - { role: route53, when: "route53 == true" }
+    - { role: postgres_install, when: "postgres_install == true" }
+    - { role: mysql_install, when: "mysql_install == true" }
+    - { role: postgis, when: "postgis == true" }
+    - { role: redis_install, when: "redis_install == true" }
+    - { role: rabbitmq_install, when: "rabbitmq_install == true" }
+    - { role: memcached, when: "memcached == true" }
+    - { role: nodejs, when: "nodejs == true" }
+    - { role: bower, when: "bower == true" }
+    - { role: nginx_install, when: "nginx_install == true" }
+    - { role: certbot, when: "certbot == true" }
+    - { role: supervisor_install, when: "supervisor_install == true" }
+    - { role: apache_install, when: "apache_install == true" }
+    - { role: virtualenv, when: "virtualenv == true" }
+    - { role: git, when: "git == true" }
+    - { role: pip, when: "pip == true" }
+    - { role: db_postgres, when: "db_postgres == true" }
+    - { role: backup_clean, when: "backup_clean == true" }
+    - { role: db_mysql, when: "db_mysql == true" }
+    - { role: migrate, when: "migrate == true" }
+    - { role: collect, when: "collect == true" }
+    - { role: supervizorctl, when: "supervizorctl == true" }
+    - { role: apachectl, when: "apachectl == true" }
+    - { role: slack, when: "slack == true" }

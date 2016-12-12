@@ -1,7 +1,6 @@
 import os
 import environ
 
-
 env = environ.Env(
     DJANGO_SECRET_KEY=(str, ''),
     DJANGO_DEBUG=(bool, False),
@@ -88,3 +87,16 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = env('DJANGO_STATIC_ROOT')
+
+if env('SENTRY_DSN'):
+    import raven
+
+    INSTALLED_APPS += (
+        'raven.contrib.django.raven_compat',
+    )
+
+    RAVEN_CONFIG = {
+        'dsn': env('SENTRY_DSN'),
+        'release': raven.fetch_git_sha(str(root)),
+    }

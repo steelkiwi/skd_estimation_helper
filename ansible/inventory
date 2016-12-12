@@ -1,0 +1,11 @@
+[production]
+sr.steel.kiwi ansible_ssh_user=admin ansible_ssh_port=22
+
+[production:vars]
+project_base_dir="/home/admin"
+project_dir="/home/admin/djangoapp"
+project_venv_dir="/home/admin/venv"
+branch=master 
+server=sr.steel.kiwi
+user=admin
+
