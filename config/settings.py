@@ -93,7 +93,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = env('DJANGO_STATIC_ROOT')
 
-if env('SENTRY_DSN'):
+if env('SENTRY_DSN', default=False):
     import raven
 
     INSTALLED_APPS += (
@@ -102,5 +102,5 @@ if env('SENTRY_DSN'):
 
     RAVEN_CONFIG = {
         'dsn': env('SENTRY_DSN'),
-        'release': raven.fetch_git_sha(str(root)),
+        'release': raven.fetch_git_sha(str(BASE_DIR)),
     }
