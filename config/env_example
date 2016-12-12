@@ -1,0 +1,4 @@
+DJANGO_SECRET_KEY='9+448nt6fohh9ucrd^e7&rvc@ylj@x$lrz1bit4t-kmq5ix&me'
+DJANGO_DEBUG=False
+DJANGO_DATABASE=psql://esthelper:esthelper@127.0.0.1:5432/esthelper
+DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost

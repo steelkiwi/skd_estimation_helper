@@ -1,0 +1,9 @@
+*.db
+.vagrant
+.idea
+db.sqlite3
+*.sqlite3
+venv
+static
+.env
+*.pyc
