@@ -1,6 +1,10 @@
 import os
 import environ
 
+import raven
+
+root = environ.Path(__file__) - 2
+
 env = environ.Env(
     DJANGO_SECRET_KEY=(str, ''),
     DJANGO_DEBUG=(bool, False),
