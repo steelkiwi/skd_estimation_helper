@@ -1,0 +1,40 @@
+---
+
+- name: Install packages
+  apt: >
+    update_cache=yes
+    name={{ item }}  state=present
+  with_items:
+    - python3-dev
+    - python3-pip
+    - python3-tk
+    - python-boto
+  become: yes
+  become_user: root
+  tags: python3
+
+- name: Download && Unpack Python-3_5_2
+  unarchive: >
+    src=https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
+    dest="{{ project_base_dir }}"
+    copy=no
+  tags: python3
+
+- name: Install Python-3_5_2
+  command: "{{ item }} chdir={{ project_base_dir }}/Python-3.5.2"
+  with_items:
+    - ./configure
+    - /usr/bin/make
+    - /usr/bin/make install
+  become: yes
+  become_user: root 
+  tags: python3
+
+- name: rm directory
+  file: >
+    path="{{ project_base_dir }}/Python-3.5.2"
+    state=absent
+  become: yes
+  become_user: root
+  tags: python3
+

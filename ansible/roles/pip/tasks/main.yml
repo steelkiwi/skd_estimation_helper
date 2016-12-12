@@ -1,0 +1,7 @@
+---
+
+- name: install project requirements
+  pip: >
+    requirements="{{ project_dir }}/requirements.txt"
+    virtualenv="{{ project_venv_dir }}"
+  tags: pip

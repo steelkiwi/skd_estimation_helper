@@ -1,0 +1,75 @@
+---
+
+project:
+  repo_url: https://github.com/steelkiwi/skd_estimation_helper 
+  name:     esthelper                                          
+  database: esthelper                                          
+  settings: "config.settings"                                  
+
+python:
+  path_2_7: "/usr/local/bin/python2.7"
+  path_3_4:  "/usr/bin/python3.4"
+  path_3_5:  "/usr/local/bin/python3.5"
+python_ver: "{{ python.path_3_5 }}"
+
+slack_notify:
+  url:      "T03P6BDDB/B10BXLQEM/MHZ4EvaadrsAxpqz0EmaSqV6"
+  channel:  "#{{ project.name }}"
+
+certbot_email: "ops@steelkiwi.com"
+
+nginx:
+  domain: "{{ server }}"
+  access_log: "{{project_base_dir}}/log/nginx-access.log" 
+  error_log: "{{project_base_dir}}/log/nginx-error.log"
+  static_root: "{{project_base_dir}}/public"
+  http: yes
+  https: yes
+
+supervisor:
+  celery_command: 
+  celerybeat_command: 
+  celery_flower_command: 
+  websocket_command:
+  elasticsearch_dir:
+  log_dir: "{{project_base_dir}}/log"
+  celery: no
+  celerybeat: no
+  celery_flower: no
+  websocket: no
+  elasticsearch: no
+
+ 
+
+
+###Install
+directory: no
+system: no
+python2: no
+python3: no
+route53: no
+postgres_install: no
+mysql_install: no
+postgis: no
+redis_install: no
+rabbitmq_install: no 
+memcached: no
+nodejs: no
+bower: no 
+certbot: no
+supervisor_install: no
+nginx_install: no
+apache_install: no
+virtualenv: no
+
+###Deploy
+git: yes
+pip: yes
+backup_clean: yes
+db_postgres: yes
+db_mysql: no
+migrate: yes
+collect: yes
+supervizorctl: yes
+apachectl: no
+slack: no

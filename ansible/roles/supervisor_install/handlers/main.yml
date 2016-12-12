@@ -1,0 +1,13 @@
+---
+
+- name: restart supervisor
+  service: >
+    name=supervisor
+    state=restarted
+  become: yes
+  become_user: root
+
+- name: restart all supervisor tasks
+  supervisorctl: >
+    name="{{ project.name }}:"
+    state=restarted
