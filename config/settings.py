@@ -90,6 +90,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = env('DJANGO_STATIC_ROOT')
+STATICFILES_DIRS = [
+    'staticfiles',
+]
 
 if env('SENTRY_DSN', default=False):
     import raven

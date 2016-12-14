@@ -1,12 +1,12 @@
 {% extends 'admin/base_site.html' %}
+{% load static %}
 
 
 {% block extrahead %}
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
             crossorigin="anonymous"></script>
-    <script>
-    </script>
+    <script src="{% static 'js/tableHeadFixer.js' %}"></script>
     <script>
         $(function() {
             // using jQuery
@@ -37,6 +37,12 @@
                     }
                 }
             });
+        });
+    </script>
+    <script>
+        $(function() {
+
+            $("#fix-table").tableHeadFixer({"left" : 1, "head": 1});
 
             $('.update-count').on('click', function() {
                 var $this = $(this);
@@ -59,33 +65,34 @@
 
 
 {% block content %}
-<table>
-    <thead>
-        <tr>
-            {% for head_entry in table.head %}
-                <th>{{ head_entry }}</th>
-            {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
-        {% for row in table.body %}
+    <div style="height: 500px;">
+        <table id="fix-table">
+            <thead>
             <tr>
-                {% for cell in row %}
-                    <td data-pk="{{ cell.pk }}"
-                        data-model="{{ cell.get_model }}"
-                        style="padding: 4px 8px;">
-                        {% if cell.increasable %}
-                            <a href="#" class="update-count decrement">-</a>
-                        {% endif %}
-                        <span class="value">{{ cell.get_table_entry }}</span class="value">
-                        {% if cell.increasable %}
-                            <a href="#" class="update-count increment">+</a>
-                        {% endif %}
-                    </td>
+                {% for head_entry in table.head %}
+                    <th>{{ head_entry }}</th>
                 {% endfor %}
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+            </thead>
+            <tbody>
+            {% for row in table.body %}
+                <tr>
+                    {% for cell in row %}
+                        <td data-pk="{{ cell.pk }}"
+                            data-model="{{ cell.get_model }}"
+                            style="padding: 4px 8px;">
+                            {% if cell.increasable %}
+                                <a href="#" class="update-count decrement">-</a>
+                            {% endif %}
+                            <span class="value">{{ cell.get_table_entry }}</span class="value">
+                            {% if cell.increasable %}
+                                <a href="#" class="update-count increment">+</a>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
