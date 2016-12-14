@@ -18,12 +18,18 @@ class EstimationDetailView(SuperuserRequiredMixin, DetailView):
         estimation = self.get_object()
         employees = Estimation.get_employees()
         employees_count = len(employees)
+
+        for employee in employees:
+            employee.get_all_rates_counts(estimation)
+
         for i, skill in enumerate(Skill.objects.all()):
+            skill_rates = skill.get_rates()
+            rates_count = skill_rates.count()
             table['body'].append([skill] + ['' for _ in range(employees_count)])
-            for j, rate in enumerate(skill.get_rates()):
+            for j, rate in enumerate(skill_rates):
                 table['body'].append([rate])
                 for employee in employees:
-                    row_index = i * (skill.get_rates().count()+1) + j + 1
+                    row_index = i * (rates_count + 1) + j + 1
                     rate_count = employee.get_skill_rate_count(estimation, skill, rate.value)
                     table['body'][row_index].append(rate_count)
 

@@ -29,7 +29,6 @@ class Employee(TimeStampedModel):
         return self.name
 
     def get_skill_rate_count(self, estimation, skill, value):
-        self.get_all_rates_counts(estimation)
         skill_rate = skill.rates.get(value=value)
         skill_rate_count, created = self.rates_count.get_or_create(
             skill_rate=skill_rate,
